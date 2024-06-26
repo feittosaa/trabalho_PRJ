@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package trabalho_prj;
 
 import java.io.EOFException;
@@ -13,11 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Vinicius
- */
-public class Ameaca implements Serializable {
+
+public class Figurinha implements Serializable {
     private String numCve;
     private String produto;
     private String versao;

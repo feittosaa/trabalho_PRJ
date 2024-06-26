@@ -24,11 +24,11 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import entities.Ameaca;
+import entities.Figurinha;
 import utils.BlobToFileConverter;
 
-public class AmeacaRepository extends RepositoryBase {
-	public void criarAmeaca(Ameaca ameaca) {
+public class FigurinhaRepository extends RepositoryBase {
+	public void criarFigurinha(Figurinha ameaca) {
 	    try {
 	      conectar();
 	      
@@ -79,7 +79,7 @@ public class AmeacaRepository extends RepositoryBase {
 	    }
 	}
 	
-	public void atualizarAmeacas(Ameaca ameaca) {
+	public void atualizarFigurinha(Figurinha ameaca) {
 	    try {
 	      conectar();
 	      
@@ -132,7 +132,7 @@ public class AmeacaRepository extends RepositoryBase {
 	    }
 	}
 	
-	public void deletarAmeaca(int idAmeaca) {
+	public void deletarFigurinha(int idAmeaca) {
 		try {
 			conectar();
 			
@@ -148,8 +148,8 @@ public class AmeacaRepository extends RepositoryBase {
 		}
 	}
 	
-	public ArrayList<Ameaca> listarAmeacas() {
-		ArrayList<Ameaca> ameacas = new ArrayList<Ameaca>();
+	public ArrayList<Figurinha> listarFigurinhas() {
+		ArrayList<Figurinha> ameacas = new ArrayList<Figurinha>();
 		
 		try {
 			conectar();
@@ -160,7 +160,7 @@ public class AmeacaRepository extends RepositoryBase {
 			
 			
 			while(resultado.next()) {
-				Ameaca ameaca = new Ameaca(); 
+				Figurinha ameaca = new Figurinha(); 
 	            ameaca.setId(resultado.getInt("id"));
 	            ameaca.setIdTipo(resultado.getInt("id_tipo"));
 	            ameaca.setIdVersao(resultado.getInt("id_versao"));
@@ -202,8 +202,8 @@ public class AmeacaRepository extends RepositoryBase {
 		return ameacas;
 	}
 	
-	public Ameaca getAmeaca(int idAmeaca) {
-		Ameaca ameaca = new Ameaca(); 
+	public Figurinha getAmeaca(int idAmeaca) {
+		Figurinha ameaca = new Figurinha(); 
 		
 		try {
 			conectar();
@@ -232,8 +232,8 @@ public class AmeacaRepository extends RepositoryBase {
 		return ameaca;
 	}
 	
-	public Ameaca pesquisar(String produto, String cve) {
-		Ameaca ameaca = new Ameaca(); 
+	public Figurinha pesquisar(String produto, String cve) {
+		Figurinha ameaca = new Figurinha(); 
 		
 		try {
 			conectar();
@@ -268,7 +268,7 @@ public class AmeacaRepository extends RepositoryBase {
 		return ameaca;
 	}
 	
-	public void atualizarAmeaca(Ameaca ameaca) {
+	public void atualizarFigurinhas(Figurinha ameaca) {
 	    try {
 	      conectar();	
 	      PreparedStatement statement = prepareStatement(
@@ -297,7 +297,7 @@ public class AmeacaRepository extends RepositoryBase {
 	    }
 	}
 	
-	public void download (Ameaca ameaca, String coluna, String tipoArquivo) throws IOException, SQLException {
+	public void download (Figurinha ameaca, String coluna, String tipoArquivo) throws IOException, SQLException {
 		
 		String nomeArquivo = ameaca.getCve()+"-"+coluna+"."+tipoArquivo;        
         String diretorio = System.getProperty("user.dir");
@@ -332,7 +332,7 @@ public class AmeacaRepository extends RepositoryBase {
 	}
 	
 	public void exportar() {
-		ArrayList<Ameaca> ameacas = this.listarAmeacas();
+		ArrayList<Figurinha> ameacas = this.listarFigurinhas();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		String diretorio = System.getProperty("user.dir");
 		
@@ -341,7 +341,7 @@ public class AmeacaRepository extends RepositoryBase {
 	          OutputStreamWriter sr = new OutputStreamWriter(fs);
 	          BufferedWriter
 	          bw = new BufferedWriter(sr);  
-	          for(Ameaca ameaca : ameacas){
+	          for(Figurinha ameaca : ameacas){
 	        	  File newFile = new File(diretorio+"/tmp");
 	        	  Path consequencia = Files.move(ameaca.getConsequencia().toPath(), newFile.toPath().resolve("consequencia-"+ameaca.getCve()+"-"+ameaca.getData()+".pdf"), StandardCopyOption.REPLACE_EXISTING);
 	        	  Path solucao = Files.move(ameaca.getSolucao().toPath(), newFile.toPath().resolve("solucao-"+ameaca.getCve()+"-"+ameaca.getData()+".pdf"), StandardCopyOption.REPLACE_EXISTING);
@@ -373,7 +373,7 @@ public class AmeacaRepository extends RepositoryBase {
 	}
 	
 	public void exportarBinario() {		
-		ArrayList<Ameaca> ameacas = this.listarAmeacas();
+		ArrayList<Figurinha> ameacas = this.listarFigurinhas();
 		String diretorio = System.getProperty("user.dir");
 		
 		try{
@@ -381,7 +381,7 @@ public class AmeacaRepository extends RepositoryBase {
 	            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutput);
 
 	            System.out.println(ameacas.get(1).getPathCorrecao());
-	            for(Ameaca ameaca : ameacas ) {
+	            for(Figurinha ameaca : ameacas ) {
 	            	File newFile = new File(diretorio+"/tmp");
 		        	  Path consequencia = Files.move(ameaca.getConsequencia().toPath(), newFile.toPath().resolve("consequencia-"+ameaca.getCve()+"-"+ameaca.getData()+".pdf"), StandardCopyOption.REPLACE_EXISTING);
 		        	  Path solucao = Files.move(ameaca.getSolucao().toPath(), newFile.toPath().resolve("solucao-"+ameaca.getCve()+"-"+ameaca.getData()+".pdf"), StandardCopyOption.REPLACE_EXISTING);
@@ -404,7 +404,7 @@ public class AmeacaRepository extends RepositoryBase {
        }
 	}
 	
-	public Iterable<Ameaca> ler(File pathName){
+	public Iterable<Figurinha> ler(File pathName){
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		
 		String extensao = pathName.getPath().substring(pathName.getPath().lastIndexOf(".") + 1).intern();
@@ -417,12 +417,12 @@ public class AmeacaRepository extends RepositoryBase {
 
 	            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 	            
-	            ArrayList<Ameaca> lista = (ArrayList<Ameaca>) objectInputStream.readObject();
+	            ArrayList<Figurinha> lista = (ArrayList<Figurinha>) objectInputStream.readObject();
 	
 	            objectInputStream.close();
 	
-	            for (Ameaca item : lista) {
-	                  this.criarAmeaca(item);
+	            for (Figurinha item : lista) {
+	                  this.criarFigurinha(item);
 	            }
 	            
 	            return lista;
@@ -433,7 +433,7 @@ public class AmeacaRepository extends RepositoryBase {
 	        }
 		}else {	
 		 try{
-	         ArrayList<Ameaca> lista = new ArrayList<Ameaca>();
+	         ArrayList<Figurinha> lista = new ArrayList<Figurinha>();
 	         if (pathName.exists())
 	         {
 	            FileInputStream fs = new FileInputStream(pathName);
@@ -444,7 +444,7 @@ public class AmeacaRepository extends RepositoryBase {
 	            while ( (linha = br.readLine())!=null ){
 	               if (linha.trim().length()>0){
 	                  String []campos = linha.split(",");
-	                  Ameaca ameaca = new Ameaca();
+	                  Figurinha ameaca = new Figurinha();
 	                  ameaca.setCve(campos[0]);
 	                  ameaca.setProduto(campos[1]);
 	                  ameaca.setVersao(campos[2]);
@@ -461,7 +461,7 @@ public class AmeacaRepository extends RepositoryBase {
 	                  ameaca.setConsequencia(new File(campos[8]));
 	                  
 	                  System.out.println("Salvando....");
-	                  this.criarAmeaca(ameaca);
+	                  this.criarFigurinha(ameaca);
 	                  lista.add(ameaca);
 	               }      
 	            }
@@ -478,18 +478,18 @@ public class AmeacaRepository extends RepositoryBase {
 		}
 	}
 	
-	public Iterable<Ameaca> importarBin (File file){
+	public Iterable<Figurinha> importarBin (File file){
 		 try {
 	            FileInputStream fileInputStream = new FileInputStream(file);
 	
 	            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 	
-	            ArrayList<Ameaca> lista = (ArrayList<Ameaca>) objectInputStream.readObject();
+	            ArrayList<Figurinha> lista = (ArrayList<Figurinha>) objectInputStream.readObject();
 	
 	            objectInputStream.close();
 	            
-	            for (Ameaca item : lista) {
-	                  this.criarAmeaca(item);
+	            for (Figurinha item : lista) {
+	                  this.criarFigurinha(item);
 	            }
 	            
 	            return lista;

@@ -13,8 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import entities.Ameaca;
-import services.AmeacaService;
+import entities.Figurinha;
+import services.FigurinhaService;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -32,14 +32,14 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import javax.swing.UIManager;
 
-public class Cad_ameaca extends javax.swing.JDialog {
+public class Cad_figurinha extends javax.swing.JDialog {
     private ExecutarCadastro executarCadastro;
-    private Ameaca ameaca;
-    private AmeacaService ameacaService = new AmeacaService();
+    private Figurinha ameaca;
+    private FigurinhaService ameacaService = new FigurinhaService();
     private boolean confirmado;
     
     
-    public Cad_ameaca(java.awt.Frame parent, ExecutarCadastro executarCadastro, Ameaca ameaca) {
+    public Cad_figurinha(java.awt.Frame parent, ExecutarCadastro executarCadastro, Figurinha ameaca) {
         super(parent, true);
         setAutoRequestFocus(false);
         confirmado = false;
@@ -65,14 +65,14 @@ public class Cad_ameaca extends javax.swing.JDialog {
         return confirmado;
     }
     
-    public static boolean executar(java.awt.Frame parent, ExecutarCadastro executarCadastro, Ameaca ameaca) {
-        Cad_ameaca tela = new Cad_ameaca(parent, executarCadastro, ameaca);
+    public static boolean executar(java.awt.Frame parent, ExecutarCadastro executarCadastro, Figurinha ameaca) {
+        Cad_figurinha tela = new Cad_figurinha(parent, executarCadastro, ameaca);
         tela.setLocationRelativeTo(null);
         tela.setVisible(true);
         return tela.confirmar();
     }
     
-    public Cad_ameaca(java.awt.Frame parent, boolean modal) {
+    public Cad_figurinha(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
 
         initComponents();
@@ -333,7 +333,7 @@ public class Cad_ameaca extends javax.swing.JDialog {
         pack();
     }
 
-    private void buttonConfirmarActionPerformed(Ameaca ameaca) {
+    private void buttonConfirmarActionPerformed(Figurinha ameaca) {
     	
     	if(ameaca.getConsequencia() == null || ameaca.getPathCorrecao() == null || ameaca.getSolucao() == null) {
     		JOptionPane.showMessageDialog(null,
@@ -373,18 +373,18 @@ public class Cad_ameaca extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cad_ameaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cad_figurinha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cad_ameaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cad_figurinha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cad_ameaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cad_figurinha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cad_ameaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cad_figurinha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Cad_ameaca dialog = new Cad_ameaca(new javax.swing.JFrame(), true);
+                Cad_figurinha dialog = new Cad_figurinha(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);

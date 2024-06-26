@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-import entities.Ameaca;
-import services.AmeacaService;
+import entities.Figurinha;
+import services.FigurinhaService;
 
 
 /**
@@ -27,11 +27,11 @@ public class TabelaDados extends AbstractTableModel {
     private static final int COL_CONSEQUENCIA = 8;
     
     private String[] colunas = new String[]{"NumCVE", "Produto", "Versão", "Tipo", "Criticidade", "Data", "Path Correção", "Solução", "Consequência"};
-    private List<Ameaca> ameacas;
-    private AmeacaService ameacaService = new AmeacaService();
+    private List<Figurinha> ameacas;
+    private FigurinhaService ameacaService = new FigurinhaService();
     
-    public TabelaDados(List<Ameaca> arrayList) {
-        this.ameacas = new ArrayList<Ameaca>(arrayList);
+    public TabelaDados(List<Figurinha> arrayList) {
+        this.ameacas = new ArrayList<Figurinha>(arrayList);
     }
     
     
@@ -53,7 +53,7 @@ public class TabelaDados extends AbstractTableModel {
     
     public Object getValueAt(int linha, int coluna) {
     	SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-    	Ameaca ameaca = ameacas.get(linha);
+    	Figurinha ameaca = ameacas.get(linha);
         
         switch(coluna) {
             case COL_NUMCVE:
@@ -81,7 +81,7 @@ public class TabelaDados extends AbstractTableModel {
     }
     
     public void setValueAt(Object valor, int linha, int coluna) {
-        Ameaca ameaca= ameacas.get(linha);
+        Figurinha ameaca= ameacas.get(linha);
         switch(coluna) {
             case COL_NUMCVE:
                 ameaca.setCve(valor.toString());
@@ -116,17 +116,17 @@ public class TabelaDados extends AbstractTableModel {
         }
     }
     
-    public Ameaca pegaAmeaca(int indice) {
+    public Figurinha pegaAmeaca(int indice) {
         return ameacas.get(indice);
     }
     
-    public void adicionarAmeaca(Ameaca ameaca) {
+    public void adicionarAmeaca(Figurinha ameaca) {
         ameacas.add(ameaca);
         int n = getRowCount()-1;
         fireTableRowsInserted(n, n);
     }
     
-    public void atualizarAmeaca(int indice, Ameaca ameaca) {
+    public void atualizarAmeaca(int indice, Figurinha ameaca) {
         ameacas.set(indice, ameaca);
         fireTableRowsUpdated(indice, indice);
     }

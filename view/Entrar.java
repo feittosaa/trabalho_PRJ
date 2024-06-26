@@ -1,7 +1,7 @@
 
 package view;
 
-import trabalho_prj.Ameaca;
+import trabalho_prj.Figurinha;
 import view.Entrar;
 import java.awt.Font;
 import javax.swing.GroupLayout.Alignment;
@@ -102,7 +102,7 @@ public class Entrar extends javax.swing.JDialog {
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         
-        Ameaca ameaca= new Ameaca();
+        Figurinha ameaca= new Figurinha();
         ameaca.abrir();
     }
 

@@ -10,8 +10,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import entities.Ameaca;
-import services.AmeacaService;
+import entities.Figurinha;
+import services.FigurinhaService;
 import utils.ButtonRenderTable;
 
 import java.awt.Component;
@@ -35,14 +35,14 @@ import java.awt.Cursor;
 
 public class Tabela extends javax.swing.JDialog {
     private TabelaDados tabelaDadosAmeaca;
-    private AmeacaService ameacaService  = new AmeacaService();
+    private FigurinhaService ameacaService  = new FigurinhaService();
     private Sobre sobre;
     
     public Tabela(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         getContentPane().setBackground(new Color(43, 62, 80));
         initComponents();
-        tabelaDadosAmeaca = new TabelaDados(ameacaService.listarAmeacas());
+        tabelaDadosAmeaca = new TabelaDados(ameacaService.listarFigurinhas());
         tabelaAmeaca.setModel(tabelaDadosAmeaca);
         sobre = new Sobre();
         sobre.setAlwaysOnTop(true);
@@ -69,7 +69,7 @@ public class Tabela extends javax.swing.JDialog {
                 int indice = tabelaAmeaca.getSelectedRow();
                 if(indice >= 0) {
 	                if (column == 6 || column == 7 || column == 8) {
-	                	Ameaca ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
+	                	Figurinha ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
 	                	
 	                	String coluna = column == 6 ? "path_correcao" : column == 7 ? "solucao" : "consequencia";
 	                	
@@ -193,9 +193,9 @@ public class Tabela extends javax.swing.JDialog {
     	        int returnValue = fileChooser.showOpenDialog(null);
     	        if (returnValue == JFileChooser.APPROVE_OPTION) {
     				File selectedFile = fileChooser.getSelectedFile();
-    				Iterable<Ameaca> ameacas =  ameacaService.lerArquivo(selectedFile);
+    				Iterable<Figurinha> ameacas =  ameacaService.lerArquivo(selectedFile);
     				
-    				for(Ameaca ameaca : ameacas) {
+    				for(Figurinha ameaca : ameacas) {
     					tabelaDadosAmeaca.adicionarAmeaca(ameaca);
     				}
     				
@@ -339,8 +339,8 @@ public class Tabela extends javax.swing.JDialog {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-    	Ameaca ameaca = new Ameaca();
-        if(Cad_ameaca.executar(null, ExecutarCadastro.adicionar, ameaca)) {
+    	Figurinha ameaca = new Figurinha();
+        if(Cad_figurinha.executar(null, ExecutarCadastro.adicionar, ameaca)) {
             tabelaDadosAmeaca.adicionarAmeaca(ameaca);
         }
     }
@@ -348,9 +348,9 @@ public class Tabela extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         int indice = tabelaAmeaca.getSelectedRow();
         if(indice >= 0) {
-        	Ameaca ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
+        	Figurinha ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
         	System.out.println("AMEACA ID: " + ameaca.getId());
-            if(Cad_ameaca.executar(null, ExecutarCadastro.atualizar, ameaca)) {
+            if(Cad_figurinha.executar(null, ExecutarCadastro.atualizar, ameaca)) {
             	ameacaService.atualizar(ameaca);
                 tabelaDadosAmeaca.atualizarAmeaca(indice, ameaca);
             }
@@ -361,7 +361,7 @@ public class Tabela extends javax.swing.JDialog {
         int indice = tabelaAmeaca.getSelectedRow();
         
         if(indice >= 0) {
-        	Ameaca ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
+        	Figurinha ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
             ameacaService.remover(ameaca.getId());
         	tabelaDadosAmeaca.deletarAmeaca(indice);
             
@@ -371,8 +371,8 @@ public class Tabela extends javax.swing.JDialog {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         int indice = tabelaAmeaca.getSelectedRow();
         if(indice >= 0) {
-            Ameaca ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
-            Cad_ameaca.executar(null, ExecutarCadastro.consultar, ameaca);
+            Figurinha ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
+            Cad_figurinha.executar(null, ExecutarCadastro.consultar, ameaca);
         }
     }
 

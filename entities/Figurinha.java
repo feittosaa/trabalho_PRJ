@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Ameaca implements Serializable{
+public class Figurinha implements Serializable{
 	private int id;
 	private int idProduto;
 	private int idVersao;
@@ -20,7 +20,7 @@ public class Ameaca implements Serializable{
 	private File pathCorrecao;
 	private File solucao;
 	private File consequencia;
-	ArrayList<Ameaca> ameacas = new ArrayList<Ameaca>();
+	ArrayList<Figurinha> figurinha = new ArrayList<Figurinha>();
 	
 	public String getCve() {
 		return cve;
